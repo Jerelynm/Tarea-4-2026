@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Listado de Calificaciones</h2>
+
+<a class="btn btn-primary" href="{% url 'calificacion_create' %}">Nueva calificación</a>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Inscripción</th>
+        <th>Unidad</th>
+        <th>Nota</th>
+        <th>Acciones</th>
+    </tr>
+
+    {% for item in datos %}
+    <tr>
+        <td>{{ item.id }}</td>
+        <td>{{ item.inscripcion }}</td>
+        <td>{{ item.unidad }}</td>
+        <td>{{ item.nota }}</td>
+        <td>
+            <a class="btn btn-warning" href="{% url 'calificacion_update' item.id %}">Editar</a>
+            <a class="btn btn-danger" href="{% url 'calificacion_delete' item.id %}">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
