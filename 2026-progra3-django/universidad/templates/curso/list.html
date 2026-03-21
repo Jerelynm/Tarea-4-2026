@@ -1,62 +1,44 @@
-{% extends "base.html" %}
-
-{% block title %}Cursos{% endblock %}
-
-{% block page_title %}
-Cursos
-{% endblock %}
-
+{% extends 'base.html' %}
 {% block content %}
+<div class="container-fluid py-4">
+    <h1 class="mb-4">Cursos</h1>
 
-<div class="card shadow-sm border-0">
-    <div class="card-body">
+    <a class="btn btn-primary mb-3" href="{% url 'curso_create' %}">
+        <i class="bi bi-plus-circle"></i> Nuevo curso
+    </a>
 
-        <h4 class="mb-3">
-            <i class="bi bi-journal-bookmark-fill"></i>
-            Gestión de Cursos
-        </h4>
-
-        <p>
-
-        </p>
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre del Curso</th>
-                    <th>Código</th>
-                    <th>Créditos</th>
-                    <th class="text-center">Acciones</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Ejemplo Curso</td>
-                    <td>CUR-001</td>
-                    <td>4</td>
-                    <td class="text-center">
-
-                        <button class="btn btn-sm btn-info">
-                            <i class="bi bi-eye"></i>
-                        </button>
-
-                        <button class="btn btn-sm btn-primary">
-                            <i class="bi bi-pencil"></i>
-                        </button>
-
-                        <button class="btn btn-sm btn-danger">
-                            <i class="bi bi-trash"></i>
-                        </button>
-
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Código</th>
+                        <th>Créditos</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in datos %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.nombre }}</td>
+                        <td>{{ item.codigo }}</td>
+                        <td>{{ item.creditos }}</td>
+                        <td>
+                            <a class="btn btn-warning btn-sm" href="{% url 'curso_update' item.id %}">Editar</a>
+                            <a class="btn btn-danger btn-sm" href="{% url 'curso_delete' item.id %}">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5">No hay cursos registrados.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-
 {% endblock %}
